@@ -87,6 +87,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:3.3.5'
   implementation group: 'com.github.crawler-commons', name: 'crawler-commons', version: '1.4'
   implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+  implementation 'org.typesense:typesense-java:1.1.0'
 
   runtimeOnly "org.flywaydb:flyway-database-postgresql:10.1.0"
   runtimeOnly 'org.postgresql:postgresql:42.7.3'
@@ -107,7 +108,6 @@ dependencies {
 
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
 
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 application {

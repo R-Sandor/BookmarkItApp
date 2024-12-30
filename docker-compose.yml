@@ -28,6 +28,14 @@ services:
       - FINDFIRST_SCREENSHOT_LOCATION=/app/screenshots
     volumes:
       - ./data/screenshots:/app/screenshots
+  typesense:
+    image: typesense/typesense:27.1
+    restart: on-failure
+    ports:
+      - "8108:8108"
+    volumes:
+      - ./data/typesense-data:/data
+    command: "--data-dir /data --api-key=xyz --enable-cors"
   db:
     image: postgres:16.2-alpine
     environment:
