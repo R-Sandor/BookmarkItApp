@@ -13,8 +13,9 @@ import lombok.Data;
 @Table("typesense_intialization")
 public class TypesenseInitRecord { 
   @Id
-  private Long Id; 
+  private Integer id; 
   private String scriptName;
+  private String path;
   private boolean initialized; 
   private Date initDate;
 }
