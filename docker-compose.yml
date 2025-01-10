@@ -33,9 +33,11 @@ services:
     restart: on-failure
     ports:
       - "8108:8108"
+    environment:
+      - TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
     volumes:
       - ./data/typesense-data:/data
-    command: "--data-dir /data --api-key=xyz --enable-cors"
+    command: "--data-dir /data --enable-cors"
   db:
     image: postgres:16.2-alpine
     environment:
