@@ -1,5 +1,11 @@
 package dev.findfirst.core.service;
 
+import jakarta.annotation.PostConstruct;
+
+import dev.findfirst.core.repository.jdbc.TypsenseInitializationRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.typesense.api.Client;
 import org.typesense.api.FieldTypes;
@@ -7,23 +13,18 @@ import org.typesense.model.CollectionResponse;
 import org.typesense.model.CollectionSchema;
 import org.typesense.model.Field;
 
-import dev.findfirst.core.repository.jdbc.TypsenseInitializationRepository;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class TypsesenseService {
+public class TypesesenseService {
 
   private final TypsenseInitializationRepository initRepo;
-  
+
   private final Client client;
 
   @PostConstruct
-  void createSchema() throws Exception {
-    
+  void createSchema()  {
+
     var q = initRepo.findByScriptName("init");
     if (q == null) {
       CollectionSchema collectionSchema = new CollectionSchema();
@@ -32,8 +33,13 @@ public class TypsesenseService {
           .addFieldsItem(new Field().name("title").type(FieldTypes.STRING))
           .addFieldsItem(new Field().name("text").type(FieldTypes.STRING));
 
-      CollectionResponse collectionResponse = client.collections().create(collectionSchema);
-      log.debug(collectionResponse.toString());
+      CollectionResponse collectionResponse;
+      try {
+        collectionResponse = client.collections().create(collectionSchema);
+        log.debug(collectionResponse.toString());
+      } catch (Exception e) {
+        log.error(e.toString());
+      }
 
     }
 
