@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "java scripts/CpEnv.java .env.dev .env && next dev --turbopack",
+    "dev": "java scripts/CpEnv.java .env.dev .env && next dev ",
     "build": "cp .env.prod .env && next build",
     "build:dev": "cp .env.dev .env && next build",
     "build:prod": "cp .env.prod .env && next build",
@@ -34,7 +34,8 @@
     "postcss": "^8.4.49",
     "react": "19.0.0",
     "react-bootstrap": "^2.10.7",
-    "react-dom": "19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1",
     "react-toastify": "^11.0.2",
     "rxjs": "^7.8.1",
     "sass": "^1.83.0",
